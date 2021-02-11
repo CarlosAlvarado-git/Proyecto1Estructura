@@ -1,0 +1,33 @@
+#La "base de datos" va a ser un yaml. (pendiente a preguntar)
+# primera ruta: PARA ABRIR O ELIMINAR CAJA FUERTE. 
+# ruta de ABRIR CAJA FUERTE: 
+    # pide codigo de usuario: 4 elemento ejemplo: 1SE4 (str) para guardarlo en un arreglo. "agregando el '\0'"
+    # el arreglo de la clave del banco ya estaría predefinido  ejemplo: BC52 (uno mismo para todos o uno para cada usuario)
+    # se concatenaría ambas claves: 1SE4BC52 con una función retornandolo.
+    # entonces, se compara con la clave que está asignada en el yaml. (viendo si creamos un array para comparar de forma de arryas)
+    # en el caso verdadero, se "abre la caja" y se muestran los datos del usuario y el contenido de la caja. 
+    # en el caso de falso, "se retorna a la pagina princial" poninedo un warning de clave erronea, contando los intentos hasta llegar al límite = 3
+# ruta de eliminación "parcial":
+    # pedir el nombre de la caja
+    # guardarlo en un str
+    # -- crear un array de dos dimenciones, con el nombre y activación de la caja fuerte. 
+    # usando el str que guarda el nombre ingresado, recorrer el array y buscara la caja fuerte y cambiar su estado a eliminado. 
+    # retornar a la página principal.
+# ruta de enlistar cajas activas:
+    # recorrer el array bidimencional y crear otro de forma unidimencional con solo los nombres de las cajas que esten "activas"
+    # utilizar el array unidimencional para saber que cajas fuertes mostrar recorriendo el yaml. 
+    # mostrar las cajas fuertes.
+#----------------
+# funcion de concatenar arrays
+    # debe recibir ambos arrays, crear uno y recorrer ambos arrays reciidos. 
+    # se recorre cada uno hasta encontrar el '\0' para ir agregando. (sin usar append)
+    # agregar el '\0' al final y retornar el array concatenado
+# funcion de comprar arrys bidimencional con str:
+    # recibir el str y el array
+    # recorrerlo y modifcar el valor de activo.
+    # "retornar" el arry modificado
+# funcion de crear un array unidimencional recorriendo el bidimencional:
+    # se recibe el bidimencional
+    # se crear uno unidimencional
+    # se agrega los nombres que esten activos
+    # se retorna el array unidimencional. 
