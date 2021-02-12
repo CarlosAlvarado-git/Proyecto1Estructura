@@ -1,5 +1,4 @@
 #La "base de datos" va a ser un yaml. (pendiente a preguntar)
-# primera ruta: PARA ABRIR O ELIMINAR CAJA FUERTE. 
 # ruta de ABRIR CAJA FUERTE: 
     # pide codigo de usuario: 4 elemento ejemplo: 1SE4 (str) para guardarlo en un arreglo. "agregando el '\0'"
     # el arreglo de la clave del banco ya estaría predefinido  ejemplo: BC52 (uno mismo para todos o uno para cada usuario)
