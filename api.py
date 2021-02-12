@@ -15,7 +15,7 @@ def abrir_caja():
 def eliminar_caja():
    return 
 @app.route('/LIST')
-def eliminar_caja():
+def listas_cajas():
    return 
 
 if __name__ == '__main__':
