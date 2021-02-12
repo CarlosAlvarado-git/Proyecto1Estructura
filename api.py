@@ -11,6 +11,12 @@ def index():
 @app.route('/OPEN')
 def abrir_caja():
    return 
+@app.route('/DELETE')
+def eliminar_caja():
+   return 
+@app.route('/LIST')
+def eliminar_caja():
+   return 
 
 if __name__ == '__main__':
     app.run()
