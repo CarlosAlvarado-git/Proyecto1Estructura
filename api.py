@@ -50,10 +50,11 @@ def abierta(values):
     with open('example.csv') as File:
         reader = csv.reader(File, delimiter=';', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for row in reader:
+            print(row[0][0:9])
+            print(values)
             if(values == row[0][0:9]):
                 return jsonify(row)
-            else:
-                return "No se encontro"
+    return "No se encontro"
 
 @app.route('/caja_eliminada/<values>', methods=["GET"])
 def eliminada():
