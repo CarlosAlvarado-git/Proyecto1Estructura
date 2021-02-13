@@ -1,4 +1,4 @@
-from flask import Flask, url_for, request, redirect
+from flask import Flask, url_for, request, redirect, jsonify
 from jinja2 import Template, Environment, FileSystemLoader
 import csv
 File_loader = FileSystemLoader("templates")
@@ -46,9 +46,15 @@ def index():
     return template.render()
 
 @app.route('/caja_abierta/<values>', methods=["GET"])
-def abierta():
+def abierta(values):
+    with open('example.csv') as File:
+        reader = csv.reader(File, delimiter=';', quotechar=',',quoting=csv.QUOTE_MINIMAL)
+        for row in reader:
+            if(values == row[0][0:9]):
+                return jsonify(row)
+            else:
+                return "No se encontro"
 
-   return
 @app.route('/caja_eliminada/<values>', methods=["GET"])
 def eliminada():
 
