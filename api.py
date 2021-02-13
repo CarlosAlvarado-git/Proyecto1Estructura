@@ -1,11 +1,11 @@
 from flask import Flask, url_for, request, redirect
 from jinja2 import Template, Environment, FileSystemLoader
-import yaml
+import csv
 File_loader = FileSystemLoader("templates")
 env = Environment(loader=File_loader)
 app = Flask(__name__)
-with open("banco.yaml") as yaml_file:
-    datos_banco = yaml.load(yaml_file)
+with open("banco.csv") as File:
+    datos_banco = csv.reader(File)
 
 def concatenar(user, banco):
 
@@ -20,8 +20,12 @@ def index():
         array[2] = request.form['var3']
         array[3] = request.form['var4']
     return 
-@app.route('/cajaabierta/<values>', methods=["GET"])
-def caja():
+@app.route('/caja_abierta/<values>', methods=["GET"])
+def abierta():
+
+   return
+@app.route('/caja_eliminada/<values>', methods=["GET"])
+def eliminada():
 
    return
 @app.route('/DELETE', methods=["GET", "POST"])
@@ -30,6 +34,12 @@ def eliminar_caja():
 @app.route('/LIST')
 def listas_cajas():
    return 
+@app.route('/Crear_Caja')
+def Crear_caja():
+    with open('banco.csv', mode='w') as b_file:
+        banco_writer = csv.writer(b_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+    return
 
 if __name__ == '__main__':
     app.run()
