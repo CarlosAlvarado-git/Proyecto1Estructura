@@ -4,8 +4,6 @@ import csv
 File_loader = FileSystemLoader("templates")
 env = Environment(loader=File_loader)
 app = Flask(__name__)
-with open("banco.csv") as File:
-    datos_banco = csv.reader(File)
 
 def concatenar(user, banco):
     clave = ["","","","","","","","","", ""]
@@ -50,7 +48,7 @@ def index():
 
 @app.route('/caja_abierta/<values>', methods=["GET"])
 def abierta(values):
-    with open('example.csv') as File:
+    with open('banco.csv') as File:
         reader = csv.reader(File, delimiter=';', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for row in reader:
             if(values == row[0][0:9]):
