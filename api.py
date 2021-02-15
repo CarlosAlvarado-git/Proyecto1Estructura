@@ -8,17 +8,18 @@ with open("banco.csv") as File:
     datos_banco = csv.reader(File)
 
 def concatenar(user, banco):
-    clave = []
+    clave = ["","","","","","","","","", ""]
     contador = 0
     for i in user:
-        if user[i] != "\0":
-            clave[contador] = user[i]
+        if i != "\0":
+            print(contador)
+            clave[contador] = i
             contador += 1
     clave[contador] = "-" 
     contador += 1       
     for i in banco:
-        if banco[i] != "\0":
-            clave[contador] = banco[i]
+        if i != "\0":
+            clave[contador] = i
             contador += 1
     clave[contador] = "\0"
     return clave
@@ -27,8 +28,8 @@ def formarString(clave):
     string = ""
     clave = clave[:-1]
     for i in clave:
-        clave += i
-    return clave
+        string += i
+    return string
 
 @app.route('/', methods=["GET","POST"])
 def index():
@@ -40,7 +41,9 @@ def index():
         array[2] = request.form['var3']
         array[3] = request.form['var4']
         clave = concatenar(array, banco)
+        claveRedireccion = ""
         claveRedireccion = formarString(clave)
+        print(claveRedireccion)
         return redirect(f"http://localhost:5000/caja_abierta/{claveRedireccion}")
     template = env.get_template('index.html')
     return template.render()
@@ -50,8 +53,6 @@ def abierta(values):
     with open('example.csv') as File:
         reader = csv.reader(File, delimiter=';', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for row in reader:
-            print(row[0][0:9])
-            print(values)
             if(values == row[0][0:9]):
                 return jsonify(row)
     return "No se encontro"
