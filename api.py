@@ -1,3 +1,4 @@
+from os import read, truncate
 from flask import Flask, url_for, request, redirect, jsonify
 from jinja2 import Template, Environment, FileSystemLoader
 import csv
@@ -10,7 +11,7 @@ def concatenar(user, banco):
     contador = 0
     for i in user:
         if i != "\0":
-            print(contador)
+            #print(contador)
             clave[contador] = i
             contador += 1
     clave[contador] = "-" 
@@ -41,7 +42,7 @@ def index():
         clave = concatenar(array, banco)
         claveRedireccion = ""
         claveRedireccion = formarString(clave)
-        print(claveRedireccion)
+        #print(claveRedireccion)
         return redirect(f"http://localhost:5000/caja_abierta/{claveRedireccion}")
     template = env.get_template('index.html')
     return template.render()
@@ -49,19 +50,63 @@ def index():
 @app.route('/caja_abierta/<values>', methods=["GET"])
 def abierta(values):
     with open('banco.csv') as File:
-        reader = csv.reader(File, delimiter=';', quotechar=',',quoting=csv.QUOTE_MINIMAL)
+        reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for row in reader:
+            print(row)
             if(values == row[0][0:9]):
                 return jsonify(row)
     return "No se encontro"
 
 @app.route('/caja_eliminada/<values>', methods=["GET"])
-def eliminada():
+def eliminada(values):
+    nueva = []
+    cont = 0
+    no = 0
+    with open('banco.csv') as File:
+        reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
+        for rows in reader:
+            if(values == rows[0][0:9]):
+                no = cont
+                pass
+            else:
+                nueva.append("")
+                cont = cont + 1
+    with open('banco.csv') as File:
+        reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
+        p = 0
+        b = 1
+        for row in reader:
+            print(cont)
+            print(row)
+            print(no)
+            print(p)
+            if(p == no and b != 0):
+                b = 0
+            else:
+                nueva[p] = row
+                p = p + 1
+    with open('banco.csv', 'w') as writeFile:
+        writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL)
+        writer.writerows(nueva)
+        
+    return jsonify(nueva)
 
-   return
 @app.route('/DELETE', methods=["GET", "POST"])
 def eliminar_caja():
-   return 
+    if(request.method == "POST"):
+        array = ["","","","","\0"]
+        banco = ["B","C","5","2","\0"]
+        array[0] = request.form['var1']
+        array[1] = request.form['var2']
+        array[2] = request.form['var3']
+        array[3] = request.form['var4']
+        clave = concatenar(array, banco)
+        claveRedireccion = ""
+        claveRedireccion = formarString(clave)
+        #print(claveRedireccion)
+        return redirect(f"http://localhost:5000/caja_eliminada/{claveRedireccion}")
+    template = env.get_template('index.html')
+    return template.render() 
 @app.route('/LIST')
 def listas_cajas():
    return 
