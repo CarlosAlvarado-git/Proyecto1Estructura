@@ -156,8 +156,7 @@ def Crear_caja(clave, nombre, monto):
         writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
         writer.writerow('\n')
         writer.writerow(datoscaja)    
-        
-    return ("Datos Ingresados: " + str(datoscaja))
+    return jsonify(datoscaja)
 
 if __name__ == '__main__':
     app.run()
