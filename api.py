@@ -140,17 +140,24 @@ def eliminar_caja():
 @app.route('/LIST')
 def listas_cajas():
    return 
-@app.route('/Crear_Caja')
-def Crear_caja(nombre, clave):
-    with open('banco.csv', mode='w') as b_file:
-        banco_writer = csv.writer(b_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-#106 linea para copiar
-    #csv = ["[]","[]","[]","[]"]
-    #nueva = ["","","",""]
-    #despues
-    #nueva = ["","","","",""]
+@app.route('/Crear_Caja/<clave>/<nombre>/<monto>', methods=["GET"])
+def Crear_caja(clave, nombre, monto):
+    datoscaja = ["","",""]
+    with open('banco.csv') as File:
+        reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
+        for rows in reader:
+            if(clave == rows[0][0:9]):
+                return "La caja ya existe"  
     
-    return
+    datoscaja[0] = clave
+    datoscaja[1] = nombre
+    datoscaja[2] = monto
+    with open('banco.csv', 'a', newline='') as writeFile:
+        writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
+        writer.writerow('\n')
+        writer.writerow(datoscaja)    
+        
+    return ("Datos Ingresados: " + str(datoscaja))
 
 if __name__ == '__main__':
     app.run()
