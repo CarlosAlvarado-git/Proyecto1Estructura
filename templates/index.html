@@ -4,7 +4,7 @@
 
 <form method="POST" action = "">
     <div class="form-group">
-        <p>Ingrese la clave del usuario: </p>
+        <p>{{mensaje}}</p>
         <div>
             <input type="text" class="form-control" name="var1" placeholder="Primer Dígito" >
             <input type="text" class="form-control" name="var2" placeholder="Segundo Dígito">
@@ -12,10 +12,26 @@
             <input type="text" class="form-control" name="var4" placeholder="Cuarto Dígito" >
         </div>
         <div>
-            <button type="submit" class="btn btn-primary">Ingresar clave del usuario</button>
+            <button type="submit" class="btn btn-primary">{{textoBoton}}</button>
         </div>
     </div>
 </form>
-
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Monto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <th scope="col">{{my_list[][]}}</th>
+        {{% for x,y,z in my_list %}}
+            <th scope="row">{{x}}</th>
+            <th scope="row">{{y}}</th>
+            <th scope="row">{{z}}</th>
+        {{% endfor %}}
+    </tbody>
+  </table>
 
 {% endblock %}

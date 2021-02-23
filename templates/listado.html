@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    <table class="table">
+        <thead class="table-dark">
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Monto</th>
+        </thead>
+        <tbody>
+            {{% for row in my_list %}}
+                {{% for x,y,z in row %}}
+                    <tr>
+                        <th scope="col">{{x}}</th>
+                        <th scope="col">{{y}}</th>
+                        <th scope="col">{{z}}</th>
+                    </tr>
+                {{% endfor %}}
+            {{% endfor %}}
+        </tbody>
+    </table>
+
+{% endblock %}
