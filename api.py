@@ -30,22 +30,22 @@ def formarString(clave):
         string += i
     return string
 
-@app.route('/', methods=["GET","POST"])
-def index():
-    if(request.method == "POST"):
-        array = ["","","","","\0"]
-        banco = ["B","C","5","2","\0"]
-        array[0] = request.form['var1']
-        array[1] = request.form['var2']
-        array[2] = request.form['var3']
-        array[3] = request.form['var4']
-        clave = concatenar(array, banco)
-        claveRedireccion = ""
-        claveRedireccion = formarString(clave)
-        #print(claveRedireccion)
-        return redirect(f"http://localhost:5000/caja_abierta/{claveRedireccion}")
-    template = env.get_template('index.html')
-    return template.render()
+#@app.route('/', methods=["GET","POST"])
+#def index():
+#    if(request.method == "POST"):
+#        array = ["","","","","\0"]
+#        banco = ["B","C","5","2","\0"]
+#        array[0] = request.form['var1']
+#        array[1] = request.form['var2']
+#        array[2] = request.form['var3']
+#        array[3] = request.form['var4']
+#        clave = concatenar(array, banco)
+#        claveRedireccion = ""
+#        claveRedireccion = formarString(clave)
+#        #print(claveRedireccion)
+#        return redirect(f"http://localhost:5000/caja_abierta/{claveRedireccion}")
+#    template = env.get_template('index.html')
+#    return template.render()
 datos = []
 aviso = ""
 @app.route('/abrir', methods=["GET","POST"])
