@@ -47,6 +47,22 @@ def index():
     template = env.get_template('index.html')
     return template.render()
 
+@app.route('/abrir', methods=["GET","POST"])
+def indexA():
+    if(request.method == "POST"):
+        array = ["","","","","\0"]
+        banco = ["B","C","5","2","\0"]
+        array[0] = request.form['var1']
+        array[1] = request.form['var2']
+        array[2] = request.form['var3']
+        array[3] = request.form['var4']
+        clave = concatenar(array, banco)
+        claveRedireccion = ""
+        claveRedireccion = formarString(clave)
+        #print(claveRedireccion)
+        return claveRedireccion
+    template = env.get_template('index.html')
+    return template.render()
 @app.route('/caja_abierta/<values>', methods=["GET"])
 def abierta(values):
     with open('banco.csv') as File:
@@ -71,6 +87,8 @@ def eliminada(values):
             else:
                 nueva.append("")
                 cont = cont + 1
+    #csv = ["[]","[]","[]","[]"]
+    #nueva = ["","",""]
     with open('banco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         p = 0
@@ -85,7 +103,7 @@ def eliminada(values):
             else:
                 nueva[p] = row
                 p = p + 1
-    with open('banco.csv', 'w') as writeFile:
+    with open('banco.csv', 'w', newline="") as writeFile:
         writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL)
         writer.writerows(nueva)
         
@@ -114,7 +132,12 @@ def listas_cajas():
 def Crear_caja(nombre, clave):
     with open('banco.csv', mode='w') as b_file:
         banco_writer = csv.writer(b_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-
+#106 linea para copiar
+    #csv = ["[]","[]","[]","[]"]
+    #nueva = ["","","",""]
+    #despues
+    #nueva = ["","","","",""]
+    
     return
 
 if __name__ == '__main__':
