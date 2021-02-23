@@ -46,7 +46,7 @@ def index():
         return redirect(f"http://localhost:5000/caja_abierta/{claveRedireccion}")
     template = env.get_template('index.html')
     return template.render()
-
+datos = []
 @app.route('/abrir', methods=["GET","POST"])
 def indexA():
     if(request.method == "POST"):
@@ -59,8 +59,14 @@ def indexA():
         clave = concatenar(array, banco)
         claveRedireccion = ""
         claveRedireccion = formarString(clave)
-        #print(claveRedireccion)
-        return claveRedireccion
+        with open('banco.csv') as File:
+            global datos
+            reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
+            for row in reader:
+                if(claveRedireccion == row[0][0:9]):
+                    datos = row
+        template = env.get_template('index.html')
+        return template.render(my_list=datos)
     template = env.get_template('index.html')
     return template.render()
 @app.route('/caja_abierta/<values>', methods=["GET"])
