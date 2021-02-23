@@ -16,6 +16,7 @@
         </div>
     </div>
 </form>
+<center><h1>{{aviso}}</h1></center>
 <table class="table">
     <thead class="table-dark">
         <tr>
@@ -25,12 +26,12 @@
         </tr>
     </thead>
     <tbody>
-        <th scope="col">{{my_list[][]}}</th>
-        {{% for x,y,z in my_list %}}
+        <tr>
+        {% for x in my_list %}
             <th scope="row">{{x}}</th>
-            <th scope="row">{{y}}</th>
-            <th scope="row">{{z}}</th>
-        {{% endfor %}}
+        {% endfor %}
+        </tr>
+        
     </tbody>
   </table>
 

@@ -47,6 +47,7 @@ def index():
     template = env.get_template('index.html')
     return template.render()
 datos = []
+aviso = ""
 @app.route('/abrir', methods=["GET","POST"])
 def indexA():
     if(request.method == "POST"):
@@ -60,15 +61,20 @@ def indexA():
         claveRedireccion = ""
         claveRedireccion = formarString(clave)
         with open('banco.csv') as File:
-            global datos
+            global datos, aviso
             reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
             for row in reader:
                 if(claveRedireccion == row[0][0:9]):
                     datos = row
+                    aviso = ""
+                    break
+                else:
+                    datos = []
+                    aviso = "No se encontro"
         template = env.get_template('index.html')
-        return template.render(my_list=datos)
+        return template.render(my_list=datos,textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:",aviso=aviso)
     template = env.get_template('index.html')
-    return template.render()
+    return template.render(textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:", aviso = "")
 @app.route('/caja_abierta/<values>', methods=["GET"])
 def abierta(values):
     with open('banco.csv') as File:
