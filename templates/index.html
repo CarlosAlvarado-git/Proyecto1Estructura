@@ -20,7 +20,6 @@
 <table class="table">
     <thead class="table-dark">
         <tr>
-            <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
             <th scope="col">Monto</th>
         </tr>
@@ -28,7 +27,9 @@
     <tbody>
         <tr>
         {% for x in my_list %}
-            <th scope="row">{{x}}</th>
+            {% if loop.index > 1 %}
+                <th scope="row">{{x}}</th>
+            {% endif %}
         {% endfor %}
         </tr>
         
