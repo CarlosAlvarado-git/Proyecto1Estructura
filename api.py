@@ -71,7 +71,7 @@ def indexA():
                     break
                 else:
                     datos = []
-                    aviso = "No se encontro"
+                    aviso = "No se encontro una caja relacionada con el código"
                     codigo = 1
         template = env.get_template('index.html')
         return template.render(my_list=datos,textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:",aviso=aviso, codigo = codigo)
