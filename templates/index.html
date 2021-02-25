@@ -17,23 +17,25 @@
     </div>
 </form>
 <center><h1>{{aviso}}</h1></center>
-<table class="table">
-    <thead class="table-dark">
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Monto</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        {% for x in my_list %}
-            {% if loop.index > 1 %}
-                <th scope="row">{{x}}</th>
-            {% endif %}
-        {% endfor %}
-        </tr>
-        
-    </tbody>
-  </table>
+{% if codigo == 0 %}
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for x in my_list %}
+                {% if loop.index > 1 %}
+                    <th scope="row">{{x}}</th>
+                {% endif %}
+            {% endfor %}
+            </tr>
+            
+        </tbody>
+    </table>
+{% endif %}
 
 {% endblock %}

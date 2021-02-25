@@ -67,12 +67,14 @@ def indexA():
                 if(claveRedireccion == row[0][0:9]):
                     datos = row
                     aviso = ""
+                    codigo = 0
                     break
                 else:
                     datos = []
                     aviso = "No se encontro"
+                    codigo = 1
         template = env.get_template('index.html')
-        return template.render(my_list=datos,textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:",aviso=aviso)
+        return template.render(my_list=datos,textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:",aviso=aviso, codigo = codigo)
     template = env.get_template('index.html')
     return template.render(textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:", aviso = "")
 @app.route('/caja_abierta/<values>', methods=["GET"])
@@ -123,6 +125,7 @@ def eliminada(values):
 
 @app.route('/DELETE', methods=["GET", "POST"])
 def eliminar_caja():
+    codigo = 1
     if(request.method == "POST"):
         array = ["","","","","\0"]
         banco = ["B","C","5","2","\0"]
@@ -136,7 +139,7 @@ def eliminar_caja():
         #print(claveRedireccion)
         return redirect(f"http://localhost:5000/caja_eliminada/{claveRedireccion}")
     template = env.get_template('index.html')
-    return template.render() 
+    return template.render(textoBoton="Eliminar caja: ",mensaje="Ingresar codigo para eliminar caja:", codigo=codigo) 
 @app.route('/LIST')
 def listas_cajas():
    return 
