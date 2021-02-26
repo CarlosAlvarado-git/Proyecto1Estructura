@@ -7,7 +7,7 @@ env = Environment(loader=File_loader)
 app = Flask(__name__)
 
 def concatenar(user, banco):
-    clave = ["","","","","","","","","", ""]
+    clave = ["","","","","","","","","",""]
     contador = 0
     for i in user:
         if i != "\0":
@@ -48,11 +48,12 @@ def formarString(clave):
 #    return template.render()
 datos = []
 aviso = ""
+array = ["","","","","\0"]
+banco = ["B","C","5","2","\0"]
 @app.route('/abrir', methods=["GET","POST"])
 def indexA():
+    global array, banco
     if(request.method == "POST"):
-        array = ["","","","","\0"]
-        banco = ["B","C","5","2","\0"]
         array[0] = request.form['var1']
         array[1] = request.form['var2']
         array[2] = request.form['var3']
@@ -78,7 +79,7 @@ def indexA():
     template = env.get_template('index.html')
     return template.render(textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:", aviso = "")
 
-@app.route('/caja_abierta/<values>', methods=["GET"])
+@app.route('/caja_abierta/<values>', methods=["GET"])#PARA PRUEBAS JMETER
 def abierta(values):
     with open('banco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
@@ -91,11 +92,11 @@ def abierta(values):
 def eliminada(values):
     nueva = []
     cont = 0
-    no = 0
+    no = -1
     with open('banco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for rows in reader:
-            if(values == rows[0][0:9]):
+            if(values == rows[0][0:9] and cont != 0):
                 no = cont
                 pass
             else:
@@ -117,18 +118,25 @@ def eliminada(values):
             else:
                 nueva[p] = row
                 p = p + 1
-    with open('banco.csv', 'w', newline="") as writeFile:
-        writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL)
-        writer.writerows(nueva)
+    with open('banco.csv', 'w', newline='') as writeFile:
+        writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
+        i = 0
+        while(i != cont):
+            if(i == 0):
+                writer.writerow(nueva[i])
+                i = i+1
+            else:
+                writer.writerow('\n')
+                writer.writerow(nueva[i]) 
+                i = i+1
         
     return jsonify(nueva)
 
 @app.route('/DELETE', methods=["GET", "POST"])
 def eliminar_caja():
+    global array, banco
     codigo = 1
     if(request.method == "POST"):
-        array = ["","","","","\0"]
-        banco = ["B","C","5","2","\0"]
         array[0] = request.form['var1']
         array[1] = request.form['var2']
         array[2] = request.form['var3']
@@ -147,14 +155,22 @@ def listas_cajas():
 
 @app.route('/Crear_Caja', methods=["GET","POST"])
 def Crear_caja():
+    global array, banco
     if(request.method == "POST"):
-        clave = request.form['var1']
-        nombre = request.form['var2']
-        telefono = request.form['var3']
-        direccion = request.form['var4']
-        monto = request.form['var5']
+        array[0] = request.form['var1']
+        array[1] = request.form['var2']
+        array[2] = request.form['var3']
+        array[3] = request.form['var4']  
+        clave = concatenar(array, banco)  
+        nombre = request.form['var5']
+        telefono = request.form['var6']
+        direccion = request.form['var7']
+        monto = request.form['var8']
+        monto = "Q. " + monto
         datoscaja = ["","","","",""]
-        datoscaja[0] = clave
+        claveRedireccion = ""
+        claveRedireccion = formarString(clave)
+        datoscaja[0] = claveRedireccion
         datoscaja[1] = nombre
         datoscaja[2] = telefono
         datoscaja[3] = direccion
@@ -162,19 +178,19 @@ def Crear_caja():
         with open('banco.csv') as File:
             reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
             for rows in reader:
-                if(clave == rows[0][0:9]):
+                if(claveRedireccion == rows[0][0:9]):
                     template = env.get_template('crear.html')
-                    return template.render(codigo=1, datoscaja=datoscaja)
+                    return template.render(codigo=1, datoscaja=datoscaja, ingresado = 0)#codigo repetido
         with open('banco.csv', 'a', newline='') as writeFile:
             writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
             writer.writerow('\n')
             writer.writerow(datoscaja) 
           
-        template = env.get_template('nuevacaja.html')
+        template = env.get_template('crear.html')
         imagen = url_for('static', filename='caja.png') 
-        return template.render(datoscaja=datoscaja, imagen=imagen)
+        return template.render(datoscaja=datoscaja, imagen=imagen, ingresado = 1)#enviando los datos
     template = env.get_template('crear.html')
-    return template.render(codigo = 0)
+    return template.render(codigo = 0, ingresado = 0)#sin enviar datos
 
 if __name__ == '__main__':
     app.run()

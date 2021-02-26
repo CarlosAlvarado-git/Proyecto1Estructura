@@ -1,9 +1,10 @@
 {% extends 'layout.html'%}
 
 {% block body %}
-
+ {% if codigo != 0 %}
 <form method="POST" action = "">
     <div class="form-group">
+       
         <p>{{mensaje}}</p>
         <div>
             <input type="text" class="form-control" name="var1" placeholder="Primer Dígito" >
@@ -16,12 +17,15 @@
         </div>
     </div>
 </form>
+{% endif %}
 <center><h1>{{aviso}}</h1></center>
 {% if codigo == 0 %}
     <table class="table">
         <thead class="table-dark">
             <tr>
                 <th scope="col">Nombre</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Direccion</th>
                 <th scope="col">Monto</th>
             </tr>
         </thead>
@@ -36,6 +40,9 @@
             
         </tbody>
     </table>
+    <form method="GET" action = "/abrir">
+        <button type="submit" class="btn btn-primary" >Cerrar Caja</button>
+    </form>
 {% endif %}
 
 {% endblock %}
