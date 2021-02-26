@@ -77,12 +77,12 @@ def indexA():
         return template.render(my_list=datos,textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:",aviso=aviso, codigo = codigo)
     template = env.get_template('index.html')
     return template.render(textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:", aviso = "")
+
 @app.route('/caja_abierta/<values>', methods=["GET"])
 def abierta(values):
     with open('banco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for row in reader:
-            print(row)
             if(values == row[0][0:9]):
                 return jsonify(row)
     return "No se encontro"
@@ -143,23 +143,38 @@ def eliminar_caja():
 @app.route('/LIST')
 def listas_cajas():
    return 
-@app.route('/Crear_Caja/<clave>/<nombre>/<monto>', methods=["GET"])
-def Crear_caja(clave, nombre, monto):
-    datoscaja = ["","",""]
-    with open('banco.csv') as File:
-        reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
-        for rows in reader:
-            if(clave == rows[0][0:9]):
-                return "La caja ya existe"  
-    
-    datoscaja[0] = clave
-    datoscaja[1] = nombre
-    datoscaja[2] = monto
-    with open('banco.csv', 'a', newline='') as writeFile:
-        writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
-        writer.writerow('\n')
-        writer.writerow(datoscaja)    
-    return jsonify(datoscaja)
+
+
+@app.route('/Crear_Caja', methods=["GET","POST"])
+def Crear_caja():
+    if(request.method == "POST"):
+        clave = request.form['var1']
+        nombre = request.form['var2']
+        telefono = request.form['var3']
+        direccion = request.form['var4']
+        monto = request.form['var5']
+        datoscaja = ["","","","",""]
+        datoscaja[0] = clave
+        datoscaja[1] = nombre
+        datoscaja[2] = telefono
+        datoscaja[3] = direccion
+        datoscaja[4] = monto
+        with open('banco.csv') as File:
+            reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
+            for rows in reader:
+                if(clave == rows[0][0:9]):
+                    template = env.get_template('crear.html')
+                    return template.render(codigo=1, datoscaja=datoscaja)
+        with open('banco.csv', 'a', newline='') as writeFile:
+            writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
+            writer.writerow('\n')
+            writer.writerow(datoscaja) 
+          
+        template = env.get_template('nuevacaja.html')
+        imagen = url_for('static', filename='caja.png') 
+        return template.render(datoscaja=datoscaja, imagen=imagen)
+    template = env.get_template('crear.html')
+    return template.render(codigo = 0)
 
 if __name__ == '__main__':
     app.run()

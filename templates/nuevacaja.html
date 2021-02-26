@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+<style>
+    button {float: right;}
+</style>
+</head>
+
+<body >
+    <div class = "container">
+        <h3>Nueva Caja:</h3>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">{{datoscaja[1]}}</th>
+                    <th scope="row">{{datoscaja[2]}}</th>
+                    <th scope="row">{{datoscaja[3]}}</th>
+                    <th scope="row">{{datoscaja[4]}}</th>
+                </tr>
+            </tbody>
+        </table>
+        <form method="GET" action = "/abrir">
+            <button type="submit" class="btn btn-primary" >Cerrar Caja</button>
+        </form>
+    </div>
+</body>

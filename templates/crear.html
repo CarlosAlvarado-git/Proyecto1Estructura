@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class = "container">
+        <form method="POST" action = "">
+            <div class="form-group">
+                <p>Ingrese los datos para crear una nueva caja: </p>
+                <div>
+                    {% if codigo == 0 %}
+                    <input type="text" class="form-control" name="var1" placeholder="Clave" >
+                    <input type="text" class="form-control" name="var2" placeholder="Nombre">
+                    <input type="text" class="form-control" name="var3" placeholder="Telefono" >
+                    <input type="text" class="form-control" name="var4" placeholder="Direccion" >
+                    <input type="text" class="form-control" name="var5" placeholder="Monto" >
+                    {% endif %}
+
+                    {% if codigo == 1 %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" style="border-color:red" name="var1" placeholder="La clave ya existe, ingrese otra clave" >
+                    </div>
+                    <input type="text" class="form-control" name="var2" placeholder="Nombre" value="{{datoscaja[1]}}">
+                    <input type="text" class="form-control" name="var3" placeholder="Telefono" value="{{datoscaja[2]}}">
+                    <input type="text" class="form-control" name="var4" placeholder="Direccion" value="{{datoscaja[3]}}">
+                    <input type="text" class="form-control" name="var5" placeholder="Monto" value="{{datoscaja[4]}}">
+                    {% endif %}
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+
