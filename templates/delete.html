@@ -1,0 +1,48 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+ {% if codigo != 0 %}
+<form method="POST" action = "">
+    <div class="form-group">
+       
+        <p>{{mensaje}}</p>
+        <div>
+            <input type="text" class="form-control" name="var1" placeholder="Primer Dígito" >
+            <input type="text" class="form-control" name="var2" placeholder="Segundo Dígito">
+            <input type="text" class="form-control" name="var3" placeholder="Tercer Dígito" >
+            <input type="text" class="form-control" name="var4" placeholder="Cuarto Dígito" >
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">{{textoBoton}}</button>
+        </div>
+    </div>
+</form>
+{% endif %}
+<center><h1>{{aviso}}</h1></center>
+{% if codigo == 0 %}
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for x in my_list %}
+                {% if loop.index > 1 %}
+                    <th scope="row">{{x}}</th>
+                {% endif %}
+            {% endfor %}
+            </tr>
+            
+        </tbody>
+    </table>
+    <form method="GET" action = "/DELETE">
+        <button type="submit" class="btn btn-primary" >Volver</button>
+    </form>
+{% endif %}
+
+{% endblock %}
