@@ -51,7 +51,7 @@ aviso = ""
 array = ["","","","","\0"]
 banco = ["B","C","5","2","\0"]
 codigo = 1
-@app.route('/abrir', methods=["GET","POST"])
+@app.route('/ABRIR', methods=["GET","POST"])
 def indexA():
     global array, banco, codigo
     if(request.method == "POST"):
