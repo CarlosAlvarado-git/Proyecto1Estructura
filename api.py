@@ -1,4 +1,5 @@
 from os import read, truncate
+from typing import no_type_check
 from flask import Flask, url_for, request, redirect, jsonify
 from jinja2 import Template, Environment, FileSystemLoader
 import csv
@@ -189,7 +190,7 @@ def Crear_caja():
                                 #PARA PRUEBAS JMETER
 
 @app.route('/caja_abierta/<values>', methods=["GET"])
-def abierta(values):
+def abierta(values=None):
     with open('banco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for row in reader:
@@ -197,7 +198,7 @@ def abierta(values):
                 return jsonify(row)
     return "No se encontro"
 @app.route('/caja_eliminada/<values>', methods=["GET"])
-def eliminada(values):
+def eliminada(values=None):
     nueva = []
     cont = 0
     no = -1
@@ -237,11 +238,26 @@ def eliminada(values):
                 writer.writerow('\n')
                 writer.writerow(nueva[i]) 
                 i = i+1
-        
     return jsonify(nueva)
 
-@app.route('/LIST')
-def listas_cajas():
-   return 
+@app.route('/C_caja/<cod>/<nombre>/<telefono>/<direccion>/<monto>')
+def C_caja(cod=None,nombre=None,telefono=None,direccion=None,monto=None):
+    datoscaja = ["","","","",""]
+    datoscaja[0] = cod
+    datoscaja[1] = nombre
+    datoscaja[2] = telefono
+    datoscaja[3] = direccion
+    datoscaja[4] = monto
+    with open('banco.csv') as File:
+        reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
+        for rows in reader:
+            if(datoscaja[0] == rows[0][0:9]):
+                return jsonify("codigo repetido")
+    with open('banco.csv', 'a', newline='') as writeFile:
+        writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
+        writer.writerow('\n')
+        writer.writerow(datoscaja)
+    
+    return jsonify(datoscaja) 
 if __name__ == '__main__':
     app.run()
