@@ -202,6 +202,7 @@ def eliminada(values=None):
     nueva = []
     cont = 0
     no = -1
+    borrada = []
     with open('banco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for rows in reader:
@@ -224,6 +225,7 @@ def eliminada(values=None):
             print(p)
             if(p == no and b != 0):
                 b = 0
+                borrada = row
             else:
                 nueva[p] = row
                 p = p + 1
@@ -238,7 +240,7 @@ def eliminada(values=None):
                 writer.writerow('\n')
                 writer.writerow(nueva[i]) 
                 i = i+1
-    return jsonify(nueva)
+    return jsonify(borrada)
 
 @app.route('/C_caja/<cod>/<nombre>/<telefono>/<direccion>/<monto>')
 def C_caja(cod=None,nombre=None,telefono=None,direccion=None,monto=None):
