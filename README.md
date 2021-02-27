@@ -17,4 +17,5 @@
   -Para miércoles 17 de Febrero, nueva visualización, rutas adaptadas por cambios al momento de avanzar con el proyecto y decisión de si utilizar un archivo Csv, yaml o json. 
   -Para el miércoles 24, creación de rutas y manejo de archivo csv para utilizarlo como base de datos. 
   -Para el viernes 26, rutas con cProfiling y separación de font y server de la api. 
-  -El proyecto se entrega el día lunes 1 de Marzo. 
+  -El proyecto se entrega el día lunes 1 de Marzo.
+  
