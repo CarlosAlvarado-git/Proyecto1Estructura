@@ -4,6 +4,7 @@ from typing import no_type_check
 from flask import Flask, url_for, request, redirect, jsonify
 from jinja2 import Template, Environment, FileSystemLoader
 import csv
+import cProfile
 File_loader = FileSystemLoader("templates")
 env = Environment(loader=File_loader)
 app = Flask(__name__)
@@ -85,7 +86,8 @@ def indexA():
 
 
 
-@app.route('/DELETE', methods=["GET", "POST"])
+@app.route('/DELETE', methods=["GET", "POST"],endpoint="eliminar_caja")
+@profile
 def eliminar_caja():
     global array, banco
     codigo = 1
@@ -150,7 +152,8 @@ def eliminar_caja():
     template = env.get_template('delete.html')
     return template.render(textoBoton="Eliminar caja: ",mensaje="Ingresar codigo para eliminar caja:", codigo=1,aviso = "") 
 
-@app.route('/Crear_Caja', methods=["GET","POST"])
+@app.route('/Crear_Caja', methods=["GET","POST"],endpoint="Crear_caja")
+@profile
 def Crear_caja():
     global array, banco
     if(request.method == "POST"):
@@ -200,7 +203,8 @@ def abierta(values=None):
             if(values == row[0][0:9]):
                 return jsonify(row)
     return "No se encontro"
-@app.route('/caja_eliminada/<values>', methods=["GET"])
+@app.route('/caja_eliminada/<values>', methods=["GET"],endpoint='eliminada')
+@profile
 def eliminada(values=None):
     nueva = []
     cont = 0
@@ -245,7 +249,8 @@ def eliminada(values=None):
                 i = i+1
     return jsonify(borrada)
 
-@app.route('/C_caja/<cod>/<nombre>/<telefono>/<direccion>/<monto>')
+@app.route('/C_caja/<cod>/<nombre>/<telefono>/<direccion>/<monto>',endpoint="C_caja")
+@profile
 def C_caja(cod=None,nombre=None,telefono=None,direccion=None,monto=None):
     datoscaja = ["","","","",""]
     datoscaja[0] = cod
@@ -266,3 +271,6 @@ def C_caja(cod=None,nombre=None,telefono=None,direccion=None,monto=None):
     return jsonify(datoscaja) 
 if __name__ == '__main__':
     app.run()
+
+cProfile.run("concatenar(['S','E','4','2',],['B','C','5','2'])")
+cProfile.run("formarString(['S','E','4','2','-','B','C','5','2',])")
