@@ -19,6 +19,6 @@
   -Para el viernes 26, rutas con cProfiling y separación de font y server de la api. 
   -El proyecto se entrega el día lunes 1 de Marzo.
   
-  #Diagrama de casos de uso
+  # Diagrama de casos de uso:
   ![image](https://user-images.githubusercontent.com/61554803/109401776-39268800-7916-11eb-9d22-09e221467fe3.png)
   
