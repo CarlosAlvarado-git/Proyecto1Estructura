@@ -1,4 +1,5 @@
 from os import read, truncate
+from memory_profiler import profile
 from typing import no_type_check
 from flask import Flask, url_for, request, redirect, jsonify
 from jinja2 import Template, Environment, FileSystemLoader
@@ -6,7 +7,7 @@ import csv
 File_loader = FileSystemLoader("templates")
 env = Environment(loader=File_loader)
 app = Flask(__name__)
-
+@profile
 def concatenar(user, banco):
     clave = ["","","","","","","","","",""]
     contador = 0
@@ -23,7 +24,7 @@ def concatenar(user, banco):
             contador += 1
     clave[contador] = "\0"
     return clave
-
+@profile
 def formarString(clave):
     string = ""
     clave = clave[:-1]
@@ -52,7 +53,8 @@ aviso = ""
 array = ["","","","","\0"]
 banco = ["B","C","5","2","\0"]
 codigo = 1
-@app.route('/ABRIR', methods=["GET","POST"])
+@app.route('/ABRIR', methods=["GET","POST"], endpoint='indexA')
+@profile
 def indexA():
     global array, banco, codigo
     if(request.method == "POST"):
@@ -189,7 +191,8 @@ def Crear_caja():
 
                                 #PARA PRUEBAS JMETER
 
-@app.route('/caja_abierta/<values>', methods=["GET"])
+@app.route('/caja_abierta/<values>', methods=["GET"],endpoint='abierta')
+@profile
 def abierta(values=None):
     with open('banco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
