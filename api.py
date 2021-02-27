@@ -197,7 +197,7 @@ def Crear_caja():
 @app.route('/caja_abierta/<values>', methods=["GET"],endpoint='abierta')
 @profile
 def abierta(values=None):
-    with open('banco.csv') as File:
+    with open('pruebasbanco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for row in reader:
             if(values == row[0][0:9]):
@@ -210,7 +210,7 @@ def eliminada(values=None):
     cont = 0
     no = -1
     borrada = []
-    with open('banco.csv') as File:
+    with open('pruebasbanco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for rows in reader:
             if(values == rows[0][0:9] and cont != 0):
@@ -221,7 +221,7 @@ def eliminada(values=None):
                 cont = cont + 1
     #csv = ["[]","[]","[]","[]"]
     #nueva = ["","",""]
-    with open('banco.csv') as File:
+    with open('pruebasbanco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         p = 0
         b = 1
@@ -236,7 +236,7 @@ def eliminada(values=None):
             else:
                 nueva[p] = row
                 p = p + 1
-    with open('banco.csv', 'w', newline='') as writeFile:
+    with open('pruebasbanco.csv', 'w', newline='') as writeFile:
         writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
         i = 0
         while(i != cont):
@@ -259,12 +259,12 @@ def C_caja(cod=None,nombre=None,telefono=None,direccion=None,monto=None):
     datoscaja[3] = direccion
     datoscaja[4] = "Q. " + monto
     
-    with open('banco.csv') as File:
+    with open('pruebasbanco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for rows in reader:
             if(datoscaja[0] == rows[0][0:9]):
                 return jsonify("codigo repetido")
-    with open('banco.csv', 'a', newline='') as writeFile:
+    with open('pruebasbanco.csv', 'a', newline='') as writeFile:
         writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
         writer.writerow('\n')
         writer.writerow(datoscaja)
