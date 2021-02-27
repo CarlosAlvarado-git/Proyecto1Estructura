@@ -84,8 +84,6 @@ def indexA():
     template = env.get_template('index.html')
     return template.render(textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:", aviso = "", codigo=1)
 
-
-
 @app.route('/DELETE', methods=["GET", "POST"],endpoint="eliminar_caja")
 @profile
 def eliminar_caja():
