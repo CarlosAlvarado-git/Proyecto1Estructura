@@ -8,22 +8,19 @@ caja_abierta;1FT6-BC52
 caja_abierta;Z99C-BC52
 caja_abierta;79EW-BC52
 caja_abierta;03BG-BC52
+caja_eliminada;1FT6-BC52
+caja_eliminada;UTF8-BC52
+caja_eliminada;C94C-BC52
+caja_eliminada;8N9J-BC52
+caja_eliminada;65Ab-BC52
+caja_eliminada;91EG-BC52
+caja_eliminada;7CF6-BC52
+caja_eliminada;CF85-BC52
 caja_abierta;49VB-BC52
 caja_abierta;Q34C-BC52
 caja_abierta;Y8Y9-BC52
 caja_abierta;BL19-BC52
 caja_abierta;K5NP-BC52
-caja_abierta;WE22-BC52
-caja_abierta;N12G-BC52
-caja_abierta;VL2W-BC52
-caja_abierta;48VD-BC52
-caja_abierta;MJ87-BC52
-caja_abierta;45A5-BC52
-caja_abierta;HET7-BC52
-caja_abierta;UFO5-BC52
-caja_abierta;PT23-BC52
-caja_abierta;CS21-BC52
-caja_abierta;TH55-BC52
 caja_abierta;26DS-BC52
 caja_abierta;8GRD-BC52
 caja_abierta;SDEW-BC52
@@ -45,6 +42,19 @@ caja_abierta;N86A-BC52
 caja_abierta;HHHH-BC52
 caja_abierta;LPER-BC52
 caja_abierta;T51G-BC52
+C_caja;CF85-BC52/RAFAEL/35492359/6 AVENIDA ZONA 11/1597
+C_caja;CH98-BC52/JIMENA/46357891/10 CALLE ZONA 7/3495
+C_caja;T86Y-BC52/PAULINA/76239476/8 AVENIDA ZONA 8/94762
+C_caja;WEW7-BC52/LAUTARO/13567845/8 AVENIDA ZONA 10/945
+C_caja;HM91-BC52/YAIMI/64869475/9 AVENIDA ZONA 1/15957
+C_caja;56XD-BC52/FELIX/31547896/8 CALLE ZONA 3/15997
+C_caja;78DV-BC52/GUSTAVO/32457896/10 CALLE ZONA 1/13547
+C_caja;9FG6-BC52/GIOVANNI/12056792/9 CALLE ZONA 9/16516
+C_caja;7CF6-BC52/GIANNI/45891263/8 CALLE ZONA 10/13541
+C_caja;S5V6-BC52/OMAR/54869475/2 AVENIDA ZONA 3/700
+C_caja;9SV5-BC52/ESTEBAN/45869452/12 CALLE ZONA 3/651981
+C_caja;DL26-BC52/HECTOR/12567845/7 AVENIDA ZONA 10/34
+C_caja;QP95-BC52/RAMIRO/89452365/9 CALLE ZONA 7/4343
 caja_abierta;78CD-BC52
 caja_abierta;VVVV-BC52
 caja_abierta;DGTT-BC52
@@ -65,14 +75,15 @@ caja_abierta;FFF8-BC52
 caja_abierta;C94C-BC52
 caja_abierta;MJ87-BC52
 caja_abierta;2GB8-BC52
-caja_abierta;G58U-BC52
-caja_abierta;DTR2-BC52
-caja_abierta;45A5-BC52
-caja_abierta;11WE-BC52
-caja_abierta;FLP4-BC52
-caja_abierta;N89I-BC52
-caja_abierta;65Ab-BC52
-caja_abierta;SLO7-BC52
+caja_eliminada;2XF6-BC52
+caja_eliminada;9G5T-BC52
+caja_eliminada;91EG-BC52
+caja_eliminada;2XF6-BC52
+caja_eliminada;35XF-BC52
+caja_eliminada;56XD-BC52
+caja_eliminada;VL2W-BC52
+caja_eliminada;YU75-BC52
+caja_eliminada;92BB-BC52
 caja_abierta;DF81-BC52
 caja_abierta;26AV-BC52
 caja_abierta;AS78-BC52
@@ -99,20 +110,15 @@ caja_abierta;N89I-BC52
 caja_abierta;HT64-BC52
 caja_abierta;GTRR-BC52
 caja_abierta;FTGH-BC52
-C_caja;CF85-BC52/RAFAEL/35492359/6 AVENIDA ZONA 11/1597
-C_caja;CH98-BC52/JIMENA/46357891/10 CALLE ZONA 7/3495
-C_caja;T86Y-BC52/PAULINA/76239476/8 AVENIDA ZONA 8/94762
-C_caja;WEW7-BC52/LAUTARO/13567845/8 AVENIDA ZONA 10/945
-C_caja;HM91-BC52/YAIMI/64869475/9 AVENIDA ZONA 1/15957
-C_caja;56XD-BC52/FELIX/31547896/8 CALLE ZONA 3/15997
-C_caja;78DV-BC52/GUSTAVO/32457896/10 CALLE ZONA 1/13547
-C_caja;9FG6-BC52/GIOVANNI/12056792/9 CALLE ZONA 9/16516
-C_caja;7CF6-BC52/GIANNI/45891263/8 CALLE ZONA 10/13541
-C_caja;S5V6-BC52/OMAR/54869475/2 AVENIDA ZONA 3/700
-C_caja;9SV5-BC52/ESTEBAN/45869452/12 CALLE ZONA 3/651981
-C_caja;DL26-BC52/HECTOR/12567845/7 AVENIDA ZONA 10/34
-C_caja;QP95-BC52/RAMIRO/89452365/9 CALLE ZONA 7/4343
 C_caja;FLP4-BC52/JACOBO/98453265/8 AVENIDA ZONA 1/4212
+caja_abierta;G58U-BC52
+caja_abierta;DTR2-BC52
+caja_abierta;45A5-BC52
+caja_abierta;11WE-BC52
+caja_abierta;FLP4-BC52
+caja_abierta;N89I-BC52
+caja_abierta;65Ab-BC52
+caja_abierta;SLO7-BC52
 C_caja;HT26-BC52/EDUARDO/7865126/3 CALLE ZONA 9/430153
 C_caja;2XF6-BC52/SANTIAGO/12567832/4 VIA ZONA 4/4561
 C_caja;9G5T-BC52/ALEXIS/45897865/8 CALLE ZONA 8/5131
@@ -130,22 +136,16 @@ caja_eliminada;Q34C-BC52
 caja_eliminada;19XW-BC52
 caja_eliminada;CS21-BC52
 caja_eliminada;48VD-BC52
-caja_eliminada;1FT6-BC52
-caja_eliminada;UTF8-BC52
-caja_eliminada;C94C-BC52
-caja_eliminada;8N9J-BC52
-caja_eliminada;65Ab-BC52
-caja_eliminada;91EG-BC52
-caja_eliminada;7CF6-BC52
-caja_eliminada;CF85-BC52
 caja_eliminada;DL26-BC52
 caja_eliminada;FLP4-BC52
-caja_eliminada;2XF6-BC52
-caja_eliminada;9G5T-BC52
-caja_eliminada;91EG-BC52
-caja_eliminada;2XF6-BC52
-caja_eliminada;35XF-BC52
-caja_eliminada;56XD-BC52
-caja_eliminada;VL2W-BC52
-caja_eliminada;YU75-BC52
-caja_eliminada;92BB-BC52
+caja_abierta;WE22-BC52
+caja_abierta;N12G-BC52
+caja_abierta;VL2W-BC52
+caja_abierta;48VD-BC52
+caja_abierta;MJ87-BC52
+caja_abierta;45A5-BC52
+caja_abierta;HET7-BC52
+caja_abierta;UFO5-BC52
+caja_abierta;PT23-BC52
+caja_abierta;CS21-BC52
+caja_abierta;TH55-BC52
