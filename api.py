@@ -226,10 +226,10 @@ def eliminada(values=None):
         p = 0
         b = 1
         for row in reader:
-            print(cont)
-            print(row)
-            print(no)
-            print(p)
+            #print(cont)
+            #print(row)
+            #print(no)
+            #print(p)
             if(p == no and b != 0):
                 b = 0
                 borrada = row
@@ -257,7 +257,8 @@ def C_caja(cod=None,nombre=None,telefono=None,direccion=None,monto=None):
     datoscaja[1] = nombre
     datoscaja[2] = telefono
     datoscaja[3] = direccion
-    datoscaja[4] = monto
+    datoscaja[4] = "Q. " + monto
+    
     with open('banco.csv') as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
         for rows in reader:
