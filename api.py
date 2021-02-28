@@ -225,10 +225,10 @@ def eliminada(values=None):
         p = 0
         b = 1
         for row in reader:
-            print(cont)
-            print(row)
-            print(no)
-            print(p)
+            #print(cont)
+            #print(row)
+            #print(no)
+            #rint(p)
             if(p == no and b != 0):
                 b = 0
                 borrada = row
