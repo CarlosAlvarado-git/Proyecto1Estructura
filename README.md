@@ -26,4 +26,4 @@
   ## Profiling Caja abierta:
   ![image](https://user-images.githubusercontent.com/61555440/109408494-e49ffe80-794f-11eb-8479-1b22b64db6f1.png)
   ## Profiling Caja eliminada
-  ![image](https://user-images.githubusercontent.com/61555440/109408550-65f79100-7950-11eb-870d-a491b472af3d.png
+  ![image](https://user-images.githubusercontent.com/61555440/109408550-65f79100-7950-11eb-870d-a491b472af3d.png)
