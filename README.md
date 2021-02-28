@@ -22,4 +22,6 @@
   # Diagrama de casos de uso:
   ![image](https://user-images.githubusercontent.com/61554803/109401776-39268800-7916-11eb-9d22-09e221467fe3.png)
   Link: https://lucid.app/lucidchart/invitations/accept/5a2a3726-ce2d-4c1f-881a-db6a1518c77b
-  
+  # PROFILING:
+  ## Profiling Caja abierta:
+  ![image](https://user-images.githubusercontent.com/61555440/109408494-e49ffe80-794f-11eb-8479-1b22b64db6f1.png)
