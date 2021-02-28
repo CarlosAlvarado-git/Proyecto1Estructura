@@ -217,6 +217,7 @@ def eliminada(values=None):
             else:
                 nueva.append("")
                 cont = cont + 1
+    print(f"el len: {len(nueva)} deberia ser igual a: 72" )
     #csv = ["[]","[]","[]","[]"]
     #nueva = ["","",""]
     with open('pruebasbanco.csv') as File:
@@ -224,13 +225,14 @@ def eliminada(values=None):
         p = 0
         b = 1
         for row in reader:
-            #print(cont)
-            #print(row)
-            #print(no)
-            #print(p)
+            print(cont)
+            print(row)
+            print(no)
+            print(p)
             if(p == no and b != 0):
                 b = 0
                 borrada = row
+                print("la encontre")
             else:
                 nueva[p] = row
                 p = p + 1
