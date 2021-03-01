@@ -185,8 +185,8 @@ def Crear_caja():
             writer.writerow(datoscaja) 
           
         template = env.get_template('crear.html')
-        imagen = url_for('static', filename='caja.png') 
-        return template.render(datoscaja=datoscaja, imagen=imagen, ingresado = 1)#enviando los datos
+        #imagen = url_for('static', filename='caja.png') 
+        return template.render(datoscaja=datoscaja, ingresado = 1)#enviando los datos
     template = env.get_template('crear.html')
     return template.render(codigo = 0, ingresado = 0)#sin enviar datos
 
