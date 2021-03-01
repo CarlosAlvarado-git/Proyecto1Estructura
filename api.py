@@ -1,13 +1,12 @@
-from os import read, truncate
 from memory_profiler import profile
-from typing import no_type_check
-from flask import Flask, url_for, request, redirect, jsonify
+from flask import Flask, request, redirect, jsonify
 from jinja2 import Template, Environment, FileSystemLoader
 import csv
 import cProfile
 File_loader = FileSystemLoader("templates")
 env = Environment(loader=File_loader)
 app = Flask(__name__)
+#-------------UNIR DOS VECTORES
 @profile
 def concatenar(user, banco):
     clave = ["","","","","","","","","",""]
@@ -25,6 +24,7 @@ def concatenar(user, banco):
             contador += 1
     clave[contador] = "\0"
     return clave
+#-------------FORMAR STRING
 @profile
 def formarString(clave):
     string = ""
@@ -32,28 +32,13 @@ def formarString(clave):
     for i in clave:
         string += i
     return string
-
-#@app.route('/', methods=["GET","POST"])
-#def index():
-#    if(request.method == "POST"):
-#        array = ["","","","","\0"]
-#        banco = ["B","C","5","2","\0"]
-#        array[0] = request.form['var1']
-#        array[1] = request.form['var2']
-#        array[2] = request.form['var3']
-#        array[3] = request.form['var4']
-#        clave = concatenar(array, banco)
-#        claveRedireccion = ""
-#        claveRedireccion = formarString(clave)
-#        #print(claveRedireccion)
-#        return redirect(f"http://localhost:5000/caja_abierta/{claveRedireccion}")
-#    template = env.get_template('index.html')
-#    return template.render()
+#-------------VARIABLES GLOBALES
 datos = []
 aviso = ""
 array = ["","","","","\0"]
 banco = ["B","C","5","2","\0"]
 codigo = 1
+#------------- RUTAS API, FRONTED PARA USUARIO
 @app.route('/ABRIR', methods=["GET","POST"], endpoint='indexA')
 @profile
 def indexA():
@@ -83,11 +68,11 @@ def indexA():
         return template.render(my_list=datos,textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:",aviso=aviso, codigo = codigo)
     template = env.get_template('index.html')
     return template.render(textoBoton="Abrir caja: ",mensaje="Ingresar codigo para abrir caja:", aviso = "", codigo=1)
-
+#-------------
 @app.route('/DELETE', methods=["GET", "POST"],endpoint="eliminar_caja")
 @profile
 def eliminar_caja():
-    global array, banco
+    global array, banco, codigo
     codigo = 1
     if(request.method == "POST"):
         array[0] = request.form['var1']
@@ -113,43 +98,43 @@ def eliminar_caja():
                     cont = cont + 1
         #csv = ["[]","[]","[]","[]"]
         #nueva = ["","",""]
-        with open('banco.csv') as File:
-            reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
-            p = 0
-            b = 1
-            for row in reader:
-                print(cont)
-                print(row)
-                print(no)
-                print(p)
-                if(p == no and b != 0):
-                    b = 0
-                    borrada = row
-                else:
-                    nueva[p] = row
-                    p = p + 1
-        with open('banco.csv', 'w', newline='') as writeFile:
-            writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
-            i = 0
-            while(i != cont):
-                if(i == 0):
-                    writer.writerow(nueva[i])
-                    i = i+1
-                else:
-                    writer.writerow('\n')
-                    writer.writerow(nueva[i]) 
-                    i = i+1
         if(no == -1):
             codigo = 1
             aviso = "No se encontro una caja relacionada con el código"
         else:
+            with open('banco.csv') as File:
+                reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
+                p = 0
+                b = 1
+                for row in reader:
+                    #print(cont)
+                    #print(row)
+                    #print(no)
+                    #print(p)
+                    if(p == no and b != 0):
+                        b = 0
+                        borrada = row
+                    else:
+                        nueva[p] = row
+                        p = p + 1
+            with open('banco.csv', 'w', newline='') as writeFile:
+                writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
+                i = 0
+                while(i != cont):
+                    if(i == 0):
+                        writer.writerow(nueva[i])
+                        i = i+1
+                    else:
+                        writer.writerow('\n')
+                        writer.writerow(nueva[i]) 
+                        i = i+1
             codigo = 0
             aviso = "Caja eliminada: "
         template = env.get_template('delete.html')
         return template.render(my_list=borrada,textoBoton="Eliminar caja: ",mensaje="Ingresar codigo para eliminar caja:",aviso=aviso, codigo = codigo)
     template = env.get_template('delete.html')
     return template.render(textoBoton="Eliminar caja: ",mensaje="Ingresar codigo para eliminar caja:", codigo=1,aviso = "") 
-
+#-------------
 @app.route('/Crear_Caja', methods=["GET","POST"],endpoint="Crear_caja")
 @profile
 def Crear_caja():
@@ -190,8 +175,8 @@ def Crear_caja():
     template = env.get_template('crear.html')
     return template.render(codigo = 0, ingresado = 0)#sin enviar datos
 
-                                #PARA PRUEBAS JMETER
-
+                                #PARA PRUEBAS
+#-------------
 @app.route('/caja_abierta/<values>', methods=["GET"],endpoint='abierta')
 @profile
 def abierta(values=None):
@@ -201,6 +186,7 @@ def abierta(values=None):
             if(values == row[0][0:9]):
                 return jsonify(row)
     return "No se encontro"
+#-------------
 @app.route('/caja_eliminada/<values>', methods=["GET"],endpoint='eliminada')
 @profile
 def eliminada(values=None):
@@ -217,38 +203,40 @@ def eliminada(values=None):
             else:
                 nueva.append("")
                 cont = cont + 1
-    print(f"el len: {len(nueva)} deberia ser igual a: 72" )
+    #print(f"el len: {len(nueva)} deberia ser igual a: 72" )
     #csv = ["[]","[]","[]","[]"]
     #nueva = ["","",""]
-    with open('pruebasbanco.csv') as File:
-        reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
-        p = 0
-        b = 1
-        for row in reader:
-            #print(cont)
-            #print(row)
-            #print(no)
-            #rint(p)
-            if(p == no and b != 0):
-                b = 0
-                borrada = row
-                print("la encontre")
-            else:
-                nueva[p] = row
-                p = p + 1
-    with open('pruebasbanco.csv', 'w', newline='') as writeFile:
-        writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
-        i = 0
-        while(i != cont):
-            if(i == 0):
-                writer.writerow(nueva[i])
-                i = i+1
-            else:
-                writer.writerow('\n')
-                writer.writerow(nueva[i]) 
-                i = i+1
+    if(no == -1):
+        pass
+    else: 
+        with open('pruebasbanco.csv') as File:
+            reader = csv.reader(File, delimiter=',', quotechar=',',quoting=csv.QUOTE_MINIMAL)
+            p = 0
+            b = 1
+            for row in reader:
+                #print(cont)
+                #print(row)
+                #print(no)
+                #rint(p)
+                if(p == no and b != 0):
+                    b = 0
+                    borrada = row
+                else:
+                    nueva[p] = row
+                    p = p + 1
+        with open('pruebasbanco.csv', 'w', newline='') as writeFile:
+            writer = csv.writer(writeFile, delimiter=",",  quotechar=',',quoting=csv.QUOTE_MINIMAL,lineterminator ='')
+            i = 0
+            while(i != cont):
+                if(i == 0):
+                    writer.writerow(nueva[i])
+                    i = i+1
+                else:
+                    writer.writerow('\n')
+                    writer.writerow(nueva[i]) 
+                    i = i+1
     return jsonify(borrada)
-
+#-------------
 @app.route('/C_caja/<cod>/<nombre>/<telefono>/<direccion>/<monto>',endpoint="C_caja")
 @profile
 def C_caja(cod=None,nombre=None,telefono=None,direccion=None,monto=None):
@@ -275,3 +263,19 @@ if __name__ == '__main__':
 
 cProfile.run("concatenar(['S','E','4','2',],['B','C','5','2'])")
 cProfile.run("formarString(['S','E','4','2','-','B','C','5','2',])")
+#@app.route('/', methods=["GET","POST"])
+#def index():
+#    if(request.method == "POST"):
+#        array = ["","","","","\0"]
+#        banco = ["B","C","5","2","\0"]
+#        array[0] = request.form['var1']
+#        array[1] = request.form['var2']
+#        array[2] = request.form['var3']
+#        array[3] = request.form['var4']
+#        clave = concatenar(array, banco)
+#        claveRedireccion = ""
+#        claveRedireccion = formarString(clave)
+#        #print(claveRedireccion)
+#        return redirect(f"http://localhost:5000/caja_abierta/{claveRedireccion}")
+#    template = env.get_template('index.html')
+#    return template.render()
